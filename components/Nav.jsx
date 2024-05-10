@@ -7,7 +7,7 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 
 const Nav = () => {
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -19,7 +19,7 @@ const Nav = () => {
       setProviders(response);
     }
     setUpProviders();
-  })
+  }, [])
 
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
@@ -38,7 +38,7 @@ const Nav = () => {
 
       <div className="sm:flex hidden">
 
-        {isUserLoggedIn ? (
+        {session?.user ? (
 
           <div className='flex gap-3 md:gap-5'>
             <Link href="/create-prompt" className='black_btn'>
@@ -51,7 +51,7 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src="assets/images/logo.svg"
+                src={session?.user.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -64,16 +64,16 @@ const Nav = () => {
           <>
 
             {providers &&
-              Object.values(providers).map((provider) => {
+              Object.values(providers).map((provider) => (
                 <button
                   type='button'
                   key={provider.name}
-                  onClick={signIn(provider.id)}
+                  onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
                   Entrar
                 </button>
-              })
+              ))
             }
 
           </>
@@ -83,10 +83,10 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       <div className='sm:hidden flex relative'>
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className='flex'>
             <Image
-              src="assets/images/logo.svg"
+              src={session?.user.image}
               width={37}
               height={37}
               className="rounded-full"
@@ -128,16 +128,16 @@ const Nav = () => {
           <>
 
             {providers &&
-              Object.values(providers).map((provider) => {
+              Object.values(providers).map((provider) => (
                 <button
                   type='button'
                   key={provider.name}
-                  onClick={signIn(provider.id)}
+                  onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
                   Sign In
                 </button>
-              })
+              ))
             }
 
           </>
