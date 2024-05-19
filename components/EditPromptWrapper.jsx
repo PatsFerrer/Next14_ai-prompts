@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+
 import EditPrompt from '@app/update-prompt/page';
 
 const EditPromptWrapper = () => {
