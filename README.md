@@ -16,3 +16,4 @@ bun dev
 
 ## Project
 ![image](https://github.com/PatsFerrer/Next14_ai-prompts/assets/124654139/dfbbb94b-c3bc-46a9-859c-852db8f2f57c)
+![image](https://github.com/PatsFerrer/Next14_ai-prompts/assets/124654139/5e019c9a-69c1-4c82-ada2-423ecbd589fe)
